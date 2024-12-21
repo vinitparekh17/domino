@@ -19,7 +19,6 @@ package main
 import (
 	"context"
 	"errors"
-	"fmt"
 	"log/slog"
 	"net/http"
 	"os"
@@ -57,7 +56,6 @@ func main() {
 	config.DiceConfig.InstanceID = iid
 	slog.SetDefault(logger.New())
 	cli.Execute()
-	fmt.Println(config.DiceConfig.WAL.Enabled)
 	go observability.Ping()
 
 	ctx, cancel := context.WithCancel(context.Background())
