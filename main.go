@@ -57,6 +57,7 @@ func main() {
 	config.DiceConfig.InstanceID = iid
 	slog.SetDefault(logger.New())
 	cli.Execute()
+	fmt.Println(config.DiceConfig.WAL.Enabled)
 	go observability.Ping()
 
 	ctx, cancel := context.WithCancel(context.Background())
