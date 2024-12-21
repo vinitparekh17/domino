@@ -59,7 +59,7 @@ func validateConfig(config *Config) error {
 func validateShardCount(sl validator.StructLevel) {
 	config := sl.Current().Interface().(Config)
 	if config.Performance.NumShards <= 0 && config.Performance.NumShards != -1 {
-		sl.ReportError(config.Performance.NumShards, "NumShards", "NumShards", "invalidValue", "use -1 for auto-sharding as per the number of CPUs or a positive integer")
+		sl.ReportError(config.Performance.NumShards, "num_shards", "NumShards", "invalidValue", "use -1 for auto-sharding as per the number of CPUs or a positive integer")
 	}
 }
 
@@ -117,10 +117,10 @@ func validateWALConfig(sl validator.StructLevel) {
 	config := sl.Current().Interface().(Config)
 	// WALMode and WriteMode compatibility checks
 	if config.WAL.Mode == "buffered" && config.WAL.WriteMode == "fsync" {
-		sl.ReportError(config.WAL.Mode, "WALMode", "WALMode", "incompatible", "walMode 'buffered' cannot be used with writeMode 'fsync'")
+		sl.ReportError(config.WAL.Mode, "mode", "Mode", "incompatible", "walMode 'buffered' cannot be used with writeMode 'fsync'")
 	}
 
 	if config.WAL.Mode == "unbuffered" && config.WAL.WriteMode == "default" {
-		sl.ReportError(config.WAL.Mode, "WALMode", "WALMode", "incompatible", "walMode 'unbuffered' cannot have writeMode as 'default'")
+		sl.ReportError(config.WAL.Mode, "mode", "Mode", "incompatible", "walMode 'unbuffered' cannot have writeMode as 'default'")
 	}
 }
