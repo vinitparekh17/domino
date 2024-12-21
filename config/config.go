@@ -108,7 +108,7 @@ wal.enabled = true
 wal.mode = "buffered"
 wal.writeMode = "default"
 wal.bufferSizeMB = 1
-wal.rotationMode = "segemnt-size"
+wal.rotationMode = "segment-size"
 wal.maxSegmentSizeMB = 16
 wal.maxSegmentRotationTime = 60s
 wal.bufferSyncInterval = 200ms
@@ -135,7 +135,7 @@ type Config struct {
 	Persistence persistence `config:"persistence"`
 	Logging     logging     `config:"logging"`
 	Network     network     `config:"network"`
-	WAL         WALConfig   `config:"WAL"`
+	WAL         walConfig   `config:"WAL"`
 }
 
 type auth struct {
@@ -191,7 +191,7 @@ type persistence struct {
 	WALEngine         string `config:"wal-engine" default:"aof" validate:"oneof=sqlite aof"`
 }
 
-type WALConfig struct {
+type walConfig struct {
 	// Directory where WAL log files will be stored
 	LogDir string `config:"log_dir" default:"tmp/dicedb-wal" validate:"dirpath,required"`
 	// Whether WAL is enabled
